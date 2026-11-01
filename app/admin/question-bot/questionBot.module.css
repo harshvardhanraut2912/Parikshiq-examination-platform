@@ -38,3 +38,13 @@
 .optOk{border-color:#34c759;background:rgba(52,199,89,.07)}
 .optOk>span{color:#248a3d}
 @media(max-width:700px){.grid2{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}.opts{grid-template-columns:1fr}.title{font-size:27px}}
+
+/* manual answer picker */
+.ansPick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0; padding: 8px 10px; border: 1px solid var(--qb-line, rgba(128,128,128,.3)); border-radius: 10px; }
+.ansMissing { border-color: #e0a100; background: rgba(224,161,0,.1); }
+.ansLabel { font-size: 13px; font-weight: 600; margin-right: 4px; }
+.ansBtn { min-width: 36px; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(128,128,128,.45); background: transparent; color: inherit; font-weight: 700; cursor: pointer; }
+.ansBtn:hover { border-color: #2e7d32; }
+.ansBtnOn { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+.ansInput { padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(128,128,128,.45); background: transparent; color: inherit; width: 160px; }
+.ansClear { padding: 4px 10px; border: 0; background: transparent; color: inherit; text-decoration: underline; cursor: pointer; font-size: 12px; opacity: .75; }
