@@ -385,6 +385,7 @@ export async function proxy(request, context) {
     '/android/download',
     '/admin/cms',
     '/admin/cms-v2',
+    '/admin/cms-v3',
     '/admin/cms/uploadmanually',
     '/admin/cms/overview',
     '/admin',

@@ -1,0 +1,49 @@
+/* 📂 SAVE AT: app/admin/cms-v3/cms-v3.css
+   Extras for CMS v3 only. Everything else comes from ../cms-v2/cms-v2.css (imported in page.js). */
+
+.pyq-left-scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+
+.pyq-path-row { display: flex; gap: 8px; }
+.pyq-path-input {
+  flex: 1; min-width: 0;
+  background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.8rem;
+  padding: 9px 11px; border-radius: 6px;
+}
+.pyq-path-input:focus { outline: none; border-color: var(--gold); }
+.pyq-hint { font-size: 0.74rem; color: var(--text-faint); line-height: 1.5; }
+.pyq-hint code { color: var(--text-dim); }
+
+.pyq-box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 0.8rem; color: var(--text-dim); }
+.pyq-box strong { color: var(--text); }
+.pyq-box-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 8px; }
+
+.pyq-warn { background: rgba(255, 159, 10, 0.1); border: 1px solid var(--warn); color: #ffcf85; font-size: 0.78rem; padding: 8px 12px; border-radius: 6px; }
+.pyq-error { background: rgba(255, 69, 58, 0.12); border: 1px solid var(--bad); color: #ff9c95; font-size: 0.78rem; padding: 8px 12px; border-radius: 6px; }
+
+.pyq-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.pyq-table th { text-align: left; font-weight: 500; color: var(--text-faint); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 6px; }
+.pyq-table td { padding: 6px; border-top: 1px solid var(--line-soft); color: var(--text-dim); vertical-align: middle; }
+.pyq-table tr.is-missing td { color: #ff9c95; background: rgba(255, 69, 58, 0.08); }
+.pyq-table .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+.pyq-chip { display: inline-block; font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--line); color: var(--text-dim); white-space: nowrap; }
+.pyq-chip.ok { color: #6fdc9b; border-color: var(--good); background: rgba(63, 166, 110, 0.12); }
+.pyq-chip.bad { color: #ff9c95; border-color: var(--bad); background: rgba(255, 69, 58, 0.12); }
+.pyq-chip.info { color: var(--gold); border-color: var(--gold-dim); }
+
+/* ---------- Image highlight inside the preview ---------- */
+.pyq-img { display: inline-block; position: relative; margin: 14px 2px 4px; max-width: 100%; border-radius: 4px; }
+.pyq-img img { display: block; max-width: 100%; }
+.pyq-img::after {
+  content: attr(data-badge);
+  position: absolute; left: 0; top: -17px; max-width: 100%;
+  font: 600 10px/16px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 0 6px; border-radius: 4px 4px 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pyq-img--local { outline: 2px dashed var(--warn); }
+.pyq-img--local::after { background: var(--warn); color: #1a1100; }
+.pyq-img--done { outline: 2px solid var(--good); }
+.pyq-img--done::after { background: var(--good); color: #04180c; }
+.pyq-img--missing { outline: 2px solid var(--bad); background: rgba(255, 69, 58, 0.14); color: #ff9c95; padding: 10px 14px; font-size: 0.8rem; font-weight: 600; }
+.pyq-img--missing::after { display: none; }
