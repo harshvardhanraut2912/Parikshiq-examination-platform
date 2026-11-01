@@ -223,7 +223,6 @@ export default function QuestionBotPage() {
     } catch {}
   }
   const setAnswer = (key, v) => setAnswers((a) => ({ ...a, [key]: v }));
-  const missingCount = chosen.filter((q) => !(answers[q.key] || q.answerKey)).length;
   const toggle = (key) => setSelected((s) => (s.includes(key) ? s.filter((k) => k !== key) : [...s, key]));
 
   return (
@@ -343,9 +342,39 @@ export default function QuestionBotPage() {
               {built.json.length} question(s) - {built.images.filter((i) => imageData[i.key]?.bytes).length}/{built.images.length} image(s) in the zip
               - math: {parsed.stats.mathml} MathML, {parsed.stats.svg} SVG
             </p>
-            {missingCount > 0 && (
-              <p className={styles.warn}><b>{missingCount} selected question(s) have no answer</b> - choose it in "Questions on this page" below.</p>
-            )}
+            {chosen.map((q, i) => {
+              const needs = !q.answerKey || answers[q.key] !== undefined;
+              if (!needs) return null;
+              const qn = (Number(settings.startNum) || 1) + i;
+              const cur = built.json[i].answer_key;
+              return (
+                <div key={q.key} className={`${styles.ansPick} ${cur ? "" : styles.ansMissing}`}>
+                  <span className={styles.ansLabel}>
+                    Q{qn} (page #{q.index}): {cur ? `answer set to ${cur.toUpperCase()}` : "answer not detected - choose:"}
+                  </span>
+                  {Object.keys(q.options).length > 0 ? (
+                    Object.keys(q.options).map((L) => (
+                      <button
+                        key={L}
+                        type="button"
+                        className={`${styles.ansBtn} ${cur === L.toLowerCase() ? styles.ansBtnOn : ""}`}
+                        onClick={() => setAnswer(q.key, L.toLowerCase())}
+                      >{L}</button>
+                    ))
+                  ) : (
+                    <input
+                      className={styles.ansInput}
+                      placeholder="numeric answer"
+                      value={answers[q.key] ?? ""}
+                      onChange={(e) => setAnswer(q.key, e.target.value)}
+                    />
+                  )}
+                  {answers[q.key] !== undefined && (
+                    <button type="button" className={styles.ansClear} onClick={() => setAnswers((a) => { const n = { ...a }; delete n[q.key]; return n; })}>reset</button>
+                  )}
+                </div>
+              );
+            })}
             {[...imageWarnings, ...built.warnings].map((w, i) => (
               <p key={i} className={styles.warn}>{w}</p>
             ))}
@@ -370,31 +399,6 @@ export default function QuestionBotPage() {
                   {out && (
                     <>
                       <div className={styles.prev} dangerouslySetInnerHTML={{ __html: withPreviewImages(out.question_html) }} />
-                      <div className={`${styles.ansPick} ${out.answer_key ? "" : styles.ansMissing}`}>
-                        <span className={styles.ansLabel}>
-                          {answers[q.key] ? "Answer (set by you)" : q.answerKey ? "Answer (detected)" : "Answer not detected - choose:"}
-                        </span>
-                        {Object.keys(q.options).length > 0 ? (
-                          Object.keys(q.options).map((L) => (
-                            <button
-                              key={L}
-                              type="button"
-                              className={`${styles.ansBtn} ${out.answer_key === L.toLowerCase() ? styles.ansBtnOn : ""}`}
-                              onClick={() => setAnswer(q.key, L.toLowerCase())}
-                            >{L}</button>
-                          ))
-                        ) : (
-                          <input
-                            className={styles.ansInput}
-                            placeholder="numeric answer"
-                            value={answers[q.key] ?? q.answerKey ?? ""}
-                            onChange={(e) => setAnswer(q.key, e.target.value)}
-                          />
-                        )}
-                        {(answers[q.key] || answers[q.key] === "") && answers[q.key] !== undefined && (
-                          <button type="button" className={styles.ansClear} onClick={() => setAnswers((a) => { const n = { ...a }; delete n[q.key]; return n; })}>reset</button>
-                        )}
-                      </div>
                       <div className={styles.opts}>
                         {Object.entries(out.options).map(([L, h]) => (
                           <div key={L} className={`${styles.opt} ${L.toLowerCase() === out.answer_key ? styles.optOk : ""}`}>
