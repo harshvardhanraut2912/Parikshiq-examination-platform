@@ -17,6 +17,7 @@ const ICONS = {
   book: <><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" /><path d="M4 21V5M9 7h6" /></>,
   folder: <><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" /></>,
   clipboard: <><rect x="5" y="4" width="14" height="17" /><path d="M9 4V2h6v2M9 10h6M9 14h6M9 18h3" /></>,
+  bot: <><rect x="4" y="8" width="16" height="12" /><path d="M12 8V4M9 13h.01M15 13h.01M9 17h6M2 13v3M22 13v3" /></>,
   chart: <><path d="M3 21h18M6 17v-6M11 17V5M16 17v-9M21 17v-4" /></>,
   plus: <><rect x="3" y="3" width="18" height="18" /><path d="M12 8v8M8 12h8" /></>,
   card: <><rect x="2" y="5" width="20" height="14" /><path d="M2 10h20M6 15h4" /></>,
